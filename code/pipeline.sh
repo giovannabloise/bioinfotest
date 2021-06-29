@@ -2,21 +2,17 @@
 
 export OUT=../output/
 
-#alinhamento
+#mapear contra genoma de referência
 
 cd ../data
 
-bwa mem -M -t 40 hg19.fasta 510-7-BRCA_S8_L001_R1_001.fastq.gz 510-7-BRCA_S8_L001_R2_001.fastq.gz > ${OUT}BRCA_aligned.sam
-
+bwa mem -M hg19.fasta 510-7-BRCA_S8_L001_R1_001.fastq.gz 510-7-BRCA_S8_L001_R2_001.fastq.gz > ${OUT}BRCA_aligned.sam
 
 #transformar .sam em .bam, gerar .bai, sortir
 
 samtools sort ${OUT}BRCA_aligned.sam > ${OUT}BRCA_aligned.bam
-
 samtools sort ${OUT}BRCA_aligned.sam > ${OUT}BRCA_aligned.sorted.bam
-
 samtools index ${OUT}BRCA_aligned.sorted.bam
-
 
 #realizar a genotipagem
 
